@@ -1,12 +1,190 @@
 ﻿<!DOCTYPE html>
 <html>
 
+<head>
 <title>TipCalculator</title>
 
-<script language="javascript" type="text/javascript" src="logic.js"></script>
+<script language="javascript" type="text/javascript" src="Logic.js"></script>
 
+<style type="text/css">
+    body {
+        margin: 0px;
+        padding: 0px;
+        background: #FFFFFF;
+        overflow: hidden;
+        -webkit-text-size-adjust: none;
+    }
 
-<body>
+    #divMain {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 540px;
+        height: 690px;
+        background-color: #76DAC4;
+    }
 
-</body>
+    #lblCheckAmount {
+        position: absolute;
+        left: 20px;
+        top: 15px;
+        width: 400px;
+        height: 30px;
+        text-align: left;
+        font-family: Sans-Serif;
+        font-size: 20px;
+        color: white;
+    }
+
+    #txtCheckAmount {
+        position: absolute;
+        left: 20px;
+        top: 45px;
+        width: 495px;
+        height: 40px;
+        text-align: left;
+        font-family: Sans-Serif;
+        font-size: 30px;
+        border: none;
+        padding-left: 5px;
+    }
+
+    #lblSalesTaxPercent {
+        position: absolute;
+        left: 20px;
+        top: 120px;
+        width: 400px;
+        height: 30px;
+        text-align: left;
+        font-family: Sans-Serif;
+        font-size: 20px;
+        color: white;
+    }
+
+    #txtSalesTaxPercent {
+        position: absolute;
+        left: 20px;
+        top: 150px;
+        width: 495px;
+        height: 40px;
+        text-align: left;
+        font-family: Sans-Serif;
+        font-size: 30px;
+        border: none;
+        padding-left: 5px;
+    }
+
+    #lblTipAmountPercent {
+        position: absolute;
+        left: 20px;
+        top: 225px;
+        width: 400px;
+        height: 30px;
+        text-align: left;
+        font-family: Sans-Serif;
+        font-size: 20px;
+        color: white;
+    }
+
+    #txtTipAmountPercent {
+        position: absolute;
+        left: 20px;
+        top: 255px;
+        width: 495px;
+        height: 40px;
+        text-align: left;
+        font-family: Sans-Serif;
+        font-size: 30px;
+        border: none;
+        padding-left: 5px;
+    }
+
+    #lblSalesTaxAmount {
+        position: absolute;
+        left: 20px;
+        top: 330px;
+        width: 400px;
+        height: 30px;
+        text-align: left;
+        font-family: Sans-Serif;
+        font-size: 20px;
+        color: white;
+    }
+
+    #txtSalesTaxAmount {
+        position: absolute;
+        left: 20px;
+        top: 360px;
+        width: 495px;
+        height: 40px;
+        text-align: left;
+        font-family: Sans-Serif;
+        font-size: 30px;
+        border: none;
+        padding-left: 5px;
+    }
+
+    #lblTipAmount {
+        position: absolute;
+        left: 20px;
+        top: 435px;
+        width: 400px;
+        height: 30px;
+        text-align: left;
+        font-family: Sans-Serif;
+        font-size: 20px;
+        color: white;
+    }
+
+    #txtTipAmount {
+        position: absolute;
+        left: 20px;
+        top: 465px;
+        width: 495px;
+        height: 40px;
+        text-align: left;
+        font-family: Sans-Serif;
+        font-size: 30px;
+        border: none;
+        padding-left: 5px;
+    }
+
+    #btnTipPreTax {
+        position: absolute;
+        left: 20px;
+        top: 465px;
+        width: 300px;
+        height: 40px;
+        text-align: center;
+        font-family: Sans-Serif;
+        font-size: 20px;
+    }
+
+</style>
+
+</head > 
+<body >
+    <div id="divMain">
+
+        <label id="lblCheckAmount">Check Amount</label>
+        <input type="text" id="txtCheckAmount" autofocus/>
+        <label id="lblSalesTaxPercent">Sales Tax (%)</label>
+        <input type="text" id="txtSalesTaxPercent" value="7"/>
+        <label id="lblTipAmountPercent">Tip Amount (%)</label>
+        <input type="text" id="txtTipAmountPercent" value="15" />
+        <label id="lblSalesTaxAmount">Sales Tax</label>
+        <input type="text" id="txtSalesTaxAmount" readonly/>
+        <label id="lblTipAmount">Tip Amount</label>
+        <input type="text" id="txtTipAmount" readonly />
+        <!--<input type="button"lbl
+               id="btnTipPreTax"
+               value="Tip Pre Tax" />
+
+        <input type="button"
+               id="btnTipOnTotal"
+               value="Tip On Total" />-->
+
+    </div>
+</body > 
 </html>
+        
