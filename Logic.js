@@ -73,7 +73,7 @@ function validateInput() {
         document.getElementById("txtCheckAmount").focus();
         document.getElementById("txtSalesTaxAmount").value = "";
         document.getElementById("txtTipAmount").value = "";
-        alert("Enter a positive number for the Check Amount.");
+        alert("Enter a positive number for the Check Amount with at most 2 decimal places.");
         return false;
     }
     // tip amount percent
@@ -81,7 +81,7 @@ function validateInput() {
         document.getElementById("txtTipAmountPercent").focus();
         document.getElementById("txtSalesTaxAmount").value = "";
         document.getElementById("txtTipAmount").value = "";
-        alert("Enter a positive number for the Tip Amount Percentage.");
+        alert("Enter a positive number for the Tip Amount Percentage with at most 2 decimal places.");
         return false;
     }
     // sales tax percent
@@ -89,7 +89,7 @@ function validateInput() {
         document.getElementById("txtSalesTaxPercent").focus();
         document.getElementById("txtSalesTaxAmount").value = "";
         document.getElementById("txtTipAmount").value = "";
-        alert("Enter a positive number for the Sales Tax Percent.");
+        alert("Enter a positive number for the Sales Tax Percent with at most 2 decimal places.");
         return false;
     }
     return true;
@@ -98,7 +98,6 @@ function validateInput() {
 function floatTryParse(numberString) {
     var checkDigits = numberString.split("");
     if (checkDigits.length === 0) {
-        //alert('Not a number!');
         return false;
     }
     var checkNumbers = new RegExp('[0-9]');
@@ -107,7 +106,6 @@ function floatTryParse(numberString) {
     var totalDecimals = 0;
     var totalNumbersBeforeDecimal = 0;
     for (var i = 0; i < checkDigits.length; i++) {
-        console.log(checkDigits[i]);
         if (checkNumbers.test(checkDigits[i])) {
             if (totalDecimals === 0) {
                 totalNumbersBeforeDecimal += 1;
@@ -119,20 +117,19 @@ function floatTryParse(numberString) {
             totalDecimals += 1;
         }
         else {
-            // alert('Not a number!');
             return false;
         }
         if (totalDecimals > 1) {
-            // alert('Not a number!');
             return false;
         }
     }
     if (totalDecimals === 1
         && (totalNumbersBeforeDecimal < 1
         || totalNumbersAfterDecimal < 1)) {
-        // alert('Not a number!');
         return false;
     }
-    //console.log('number!!');
+    if (totalNumbersAfterDecimal > 2) {
+        return false;
+    }
     return true;
 }
