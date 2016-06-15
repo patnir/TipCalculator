@@ -1,5 +1,5 @@
-﻿gSalesTaxPercent;
-gTipPercent;
+﻿var gSalesTaxPercent;
+var gTipPercent;
 
 function body_load() {
     btnTipPreTax.onmousedown = preTax_onemousedown;
@@ -13,6 +13,9 @@ function body_load() {
 
 function convertNumberToString(number) {
     number = Math.round(number * 100) / 100;
+    if (number % 1 === 0) {
+        return number.toString() + ".00";
+    }
     return number.toString();
 }
 
@@ -23,10 +26,10 @@ function preTax_onemousedown(event) {
     }
 
     var checkAmount = parseFloat(document.getElementById("txtCheckAmount").value.trim());
-    var tipAmountPercent = parseFloat(document.getElementById("txtTipAmountPercent").value.trim());
-    var salesTaxPercent = parseFloat(document.getElementById("txtSalesTaxPercent").value.trim());
-    var salesTaxAmount = checkAmount - checkAmount * (100 / (100 + salesTaxPercent));
-    var tipAmount = checkAmount * (100 / (100 + salesTaxPercent)) * tipAmountPercent / 100;
+    gTipPercent = parseFloat(document.getElementById("txtTipAmountPercent").value.trim());
+    gSalesTaxPercent = parseFloat(document.getElementById("txtSalesTaxPercent").value.trim());
+    var salesTaxAmount = checkAmount - checkAmount * (100 / (100 + gSalesTaxPercent));
+    var tipAmount = checkAmount * (100 / (100 + gSalesTaxPercent)) * gTipPercent / 100;
 
     document.getElementById("txtSalesTaxAmount").value = convertNumberToString(salesTaxAmount);
     document.getElementById("txtTipAmount").value = convertNumberToString(tipAmount);
@@ -40,11 +43,10 @@ function tipTotal_onmousedown(event) {
     }
 
     var checkAmount = parseFloat(document.getElementById("txtCheckAmount").value.trim());
-    var tipAmountPercent = parseFloat(document.getElementById("txtTipAmountPercent").value.trim());
-    var salesTaxPercent = parseFloat(document.getElementById("txtSalesTaxPercent").value.trim());
-
-    var salesTaxAmount = checkAmount - checkAmount * (100 / (100 + salesTaxPercent));
-    var tipAmount = checkAmount * tipAmountPercent / 100;
+    gTipPercent = parseFloat(document.getElementById("txtTipAmountPercent").value.trim());
+    gSalesTaxPercent = parseFloat(document.getElementById("txtSalesTaxPercent").value.trim());
+    var salesTaxAmount = checkAmount - checkAmount * (100 / (100 + gSalesTaxPercent));
+    var tipAmount = checkAmount * gTipPercent / 100;
 
     document.getElementById("txtSalesTaxAmount").value = convertNumberToString(salesTaxAmount);
     document.getElementById("txtTipAmount").value = convertNumberToString(tipAmount);
@@ -54,10 +56,15 @@ function tipTotal_onmousedown(event) {
 
 function storeSalesTipPercent() {
     localStorage.stp = "" + gSalesTaxPercent + "";
-    // var userZip = localStorage.stp;
-
     localStorage.tp = "" + gTipPercent + "";
-    // var userZip = localStorage.tp;
+}
+
+function ditStorageGet(key, dfltValue) {
+    var value = localStorage.getItem(key);
+    if (value == undefined) {
+        return dfltValue;
+    }
+    return value;
 }
 
 function validateInput() {
@@ -86,14 +93,6 @@ function validateInput() {
         return false;
     }
     return true;
-}
-
-function ditStorageGet(key, dfltValue) {
-    var value = localStorage.getItem(key);
-    if (value == undefined) {
-        return dfltValue;
-    }
-    return value;
 }
 
 function floatTryParse(numberString) {
