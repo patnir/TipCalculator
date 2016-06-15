@@ -1,7 +1,21 @@
-﻿function body_load() {
+﻿gSalesTaxPercent;
+gTipPercent;
+
+function body_load() {
     btnTipPreTax.onmousedown = preTax_onemousedown;
     btnTipOnTotal.onmousedown = tipTotal_onmousedown;
+    gSalesTaxPercent =  ditStorageGet('stp', 7);
+    gTipPercent = ditStorageGet('tp', 15);
+    gSalesTaxPercent
+    document.getElementById("txtSalesTaxPercent").value = convertNumberToString(gSalesTaxPercent);
+    document.getElementById("txtTipAmountPercent").value = convertNumberToString(gTipPercent);
 }
+
+function convertNumberToString(number) {
+    number = Math.round(number * 100) / 100;
+    return number.toString();
+}
+
 
 function preTax_onemousedown(event) {
     if (validateInput() === false) {
@@ -14,11 +28,10 @@ function preTax_onemousedown(event) {
     var salesTaxAmount = checkAmount - checkAmount * (100 / (100 + salesTaxPercent));
     var tipAmount = checkAmount * (100 / (100 + salesTaxPercent)) * tipAmountPercent / 100;
 
-    salesTaxAmount = Math.round(salesTaxAmount * 100) / 100;
-    tipAmount = Math.round(tipAmount * 100) / 100;
+    document.getElementById("txtSalesTaxAmount").value = convertNumberToString(salesTaxAmount);
+    document.getElementById("txtTipAmount").value = convertNumberToString(tipAmount);
 
-    document.getElementById("txtSalesTaxAmount").value = salesTaxAmount.toString();
-    document.getElementById("txtTipAmount").value = tipAmount.toString();
+    storeSalesTipPercent();
 }
 
 function tipTotal_onmousedown(event) {
@@ -33,30 +46,54 @@ function tipTotal_onmousedown(event) {
     var salesTaxAmount = checkAmount - checkAmount * (100 / (100 + salesTaxPercent));
     var tipAmount = checkAmount * tipAmountPercent / 100;
 
-    salesTaxAmount = Math.round(salesTaxAmount * 100) / 100;
-    tipAmount = Math.round(tipAmount * 100) / 100;
+    document.getElementById("txtSalesTaxAmount").value = convertNumberToString(salesTaxAmount);
+    document.getElementById("txtTipAmount").value = convertNumberToString(tipAmount);
+    
+    storeSalesTipPercent();
+}
 
-    document.getElementById("txtSalesTaxAmount").value = salesTaxAmount.toString();
-    document.getElementById("txtTipAmount").value = tipAmount.toString();
+function storeSalesTipPercent() {
+    localStorage.stp = "" + gSalesTaxPercent + "";
+    // var userZip = localStorage.stp;
+
+    localStorage.tp = "" + gTipPercent + "";
+    // var userZip = localStorage.tp;
 }
 
 function validateInput() {
     // check amount
     if (floatTryParse(document.getElementById("txtCheckAmount").value.trim()) === false) {
-        alert("Enter a number for the Check Amount.");
+        document.getElementById("txtCheckAmount").focus();
+        document.getElementById("txtSalesTaxAmount").value = "";
+        document.getElementById("txtTipAmount").value = "";
+        alert("Enter a positive number for the Check Amount.");
         return false;
     }
     // tip amount percent
     if (floatTryParse(document.getElementById("txtTipAmountPercent").value.trim()) === false) {
-        alert("Enter a number for the Tip Amount Percentage.");
+        document.getElementById("txtTipAmountPercent").focus();
+        document.getElementById("txtSalesTaxAmount").value = "";
+        document.getElementById("txtTipAmount").value = "";
+        alert("Enter a positive number for the Tip Amount Percentage.");
         return false;
     }
     // sales tax percent
     if (floatTryParse(document.getElementById("txtSalesTaxPercent").value.trim()) === false) {
-        alert("Enter a number for the Sales Tax Percent.");
+        document.getElementById("txtSalesTaxPercent").focus();
+        document.getElementById("txtSalesTaxAmount").value = "";
+        document.getElementById("txtTipAmount").value = "";
+        alert("Enter a positive number for the Sales Tax Percent.");
         return false;
     }
     return true;
+}
+
+function ditStorageGet(key, dfltValue) {
+    var value = localStorage.getItem(key);
+    if (value == undefined) {
+        return dfltValue;
+    }
+    return value;
 }
 
 function floatTryParse(numberString) {
