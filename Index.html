@@ -4,9 +4,9 @@
 <head>
     <title>TipCalculator</title>
 
-    <meta name="android-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="minimal-ui, width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-
+    <meta name="HandheldFriendly" content="true" />
     <script language="javascript" type="text/javascript" src="Logic.js"></script>
 
     <style type="text/css">
@@ -23,7 +23,7 @@
             top: 0px;
             width: 360px;
             transition: margin-left .5s;
-            height: 520px;
+            height: 570px;
             background-color: #76DAC4;
         }
 
@@ -32,46 +32,19 @@
             left: 0px;
             top: 0px;
             width: 360px;
-            height: 33px;
+            height: 40px;
             text-align: center;
             font-family: Sans-Serif;
-            font-size: 20px;
+            font-size: 25px;
             color: #76DAC4;
             padding-top: 7px;
             background-color: #4D5656;
         }
 
-        #menuBar1 {
-            position: absolute;
-            top: 6px;
-            left: 5px;
-            width: 30px;
-            height: 5px;
-            background-color:white;
-        }
-
-        #menuBar2 {
-            position: absolute;
-            top: 16px;
-            left: 5px;
-            width: 30px;
-            height: 5px;
-            background-color: white;
-        }
-
-        #menuBar3 {
-            position: absolute;
-            top: 26px;
-            left: 5px;
-            width: 30px;
-            height: 5px;
-            background-color: white;
-        }
-
         #lblCheckAmount {
             position: absolute;
             left: 40px;
-            top: 50px;
+            top: 70px;
             width: 360px;
             height: 30px;
             text-align: left;
@@ -83,7 +56,7 @@
         #txtCheckAmount {
             position: absolute;
             left: 40px;
-            top: 70px;
+            top: 90px;
             width: 280px;
             height: 30px;
             text-align: left;
@@ -96,7 +69,7 @@
         #lblSalesTaxPercent {
             position: absolute;
             left: 40px;
-            top: 120px;
+            top: 145px;
             width: 360px;
             height: 30px;
             text-align: left;
@@ -108,7 +81,7 @@
         #txtSalesTaxPercent {
             position: absolute;
             left: 40px;
-            top: 140px;
+            top: 165px;
             width: 280px;
             height: 30px;
             text-align: left;
@@ -121,7 +94,7 @@
         #lblTipAmountPercent {
             position: absolute;
             left: 40px;
-            top: 190px;
+            top: 220px;
             width: 360px;
             height: 30px;
             text-align: left;
@@ -133,7 +106,7 @@
         #txtTipAmountPercent {
             position: absolute;
             left: 40px;
-            top: 210px;
+            top: 240px;
             width: 280px;
             height: 30px;
             text-align: left;
@@ -146,7 +119,7 @@
         #lblSalesTaxAmount {
             position: absolute;
             left: 40px;
-            top: 260px;
+            top: 295px;
             width: 360px;
             height: 30px;
             text-align: left;
@@ -158,7 +131,7 @@
         #txtSalesTaxAmount {
             position: absolute;
             left: 40px;
-            top: 280px;
+            top: 315px;
             width: 280px;
             height: 30px;
             text-align: left;
@@ -170,7 +143,7 @@
         #lblTipAmount {
             position: absolute;
             left: 40px;
-            top: 330px;
+            top: 370px;
             width: 360px;
             height: 30px;
             text-align: left;
@@ -182,7 +155,7 @@
         #txtTipAmount {
             position: absolute;
             left: 40px;
-            top: 350px;
+            top: 390px;
             width: 280px;
             height: 30px;
             text-align: left;
@@ -195,7 +168,7 @@
         #btnCalculateTip {
             position: absolute;
             left: 60px;
-            top: 430px;
+            top: 475px;
             width: 240px;
             height: 35px;
             text-align: center;
@@ -246,12 +219,12 @@
             top: 5px;
             left: 5px;
             width: 35px;
-            height: 5px;
+            height: 20px;
             background-color: #76DAC4;
             border-color: white;
             color: white;
-            padding-bottom: 25px;
-            font-size: 16px;
+            padding-bottom: 30px;
+            font-size: 20px;
             border-style: solid;
         }
     </style>
