@@ -4,8 +4,8 @@ var gTipPercent;
 gCalculateTipOnTotal = true;
 
 function body_load() {
-    btnTipPreTax.onmousedown = preTax_onemousedown;
-    btnTipOnTotal.onmousedown = tipTotal_onmousedown;
+    btnCalculateTip.onmousedown = calculateTip_onmousedown;
+   
     btnMenu.onmousedown = menu_onmousedown;
     linkTipPreTax.onmousedown = linkTipPreTax_onmousedown;
     linkTipOnTotal.onmousedown = linkTipOnTotal_onmousedown;
@@ -54,7 +54,7 @@ function convertNumberToString(number) {
 }
 
 
-function preTax_onemousedown(event) {
+function calculateTip_onmousedown(event) {
     if (validateInput() === false) {
         return;
     }
@@ -62,25 +62,14 @@ function preTax_onemousedown(event) {
     var checkAmount = parseFloat(document.getElementById("txtCheckAmount").value.trim());
     gTipPercent = parseFloat(document.getElementById("txtTipAmountPercent").value.trim());
     gSalesTaxPercent = parseFloat(document.getElementById("txtSalesTaxPercent").value.trim());
-    var salesTaxAmount = checkAmount - checkAmount * (100 / (100 + gSalesTaxPercent));
-    var tipAmount = checkAmount * (100 / (100 + gSalesTaxPercent)) * gTipPercent / 100;
 
-    document.getElementById("txtSalesTaxAmount").value = convertNumberToString(salesTaxAmount);
-    document.getElementById("txtTipAmount").value = convertNumberToString(tipAmount);
-
-    storeSalesTipPercent();
-}
-
-function tipTotal_onmousedown(event) {
-    if (validateInput() === false) {
-        return;
+    if (gCalculateTipOnTotal === false) {
+        var salesTaxAmount = checkAmount - checkAmount * (100 / (100 + gSalesTaxPercent));
+        var tipAmount = checkAmount * (100 / (100 + gSalesTaxPercent)) * gTipPercent / 100;
+    } else {
+        var salesTaxAmount = checkAmount - checkAmount * (100 / (100 + gSalesTaxPercent));
+        var tipAmount = checkAmount * gTipPercent / 100;
     }
-
-    var checkAmount = parseFloat(document.getElementById("txtCheckAmount").value.trim());
-    gTipPercent = parseFloat(document.getElementById("txtTipAmountPercent").value.trim());
-    gSalesTaxPercent = parseFloat(document.getElementById("txtSalesTaxPercent").value.trim());
-    var salesTaxAmount = checkAmount - checkAmount * (100 / (100 + gSalesTaxPercent));
-    var tipAmount = checkAmount * gTipPercent / 100;
 
     document.getElementById("txtSalesTaxAmount").value = convertNumberToString(salesTaxAmount);
     document.getElementById("txtTipAmount").value = convertNumberToString(tipAmount);
