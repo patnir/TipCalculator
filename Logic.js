@@ -67,9 +67,9 @@ function calculateTip_onmousedown(event) {
         return;
     }
 
-    var checkAmount = parseFloat(document.getElementById("txtCheckAmount").value.trim());
-    gTipPercent = parseFloat(document.getElementById("txtTipAmountPercent").value.trim());
-    gSalesTaxPercent = parseFloat(document.getElementById("txtSalesTaxPercent").value.trim());
+    var checkAmount = parseFloat(txtCheckAmount.value.trim());
+    gTipPercent = parseFloat(txtTipAmountPercent.value.trim());
+    gSalesTaxPercent = parseFloat(txtSalesTaxPercent.value.trim());
 
     if (gCalculateTipOnTotal === false) {
         var salesTaxAmount = checkAmount - checkAmount * (100 / (100 + gSalesTaxPercent));
@@ -79,8 +79,8 @@ function calculateTip_onmousedown(event) {
         var tipAmount = checkAmount * gTipPercent / 100;
     }
 
-    document.getElementById("txtSalesTaxAmount").value = "$" + convertNumberToString(salesTaxAmount);
-    document.getElementById("txtTipAmount").value = "$" + convertNumberToString(tipAmount);
+    txtSalesTaxAmount.value = "$" + convertNumberToString(salesTaxAmount);
+    txtTipAmount.value = "$" + convertNumberToString(tipAmount);
 
     storeSalesTipPercent();
 }
@@ -100,26 +100,26 @@ function ditStorageGet(key, dfltValue) {
 
 function validateInput() {
     // check amount
-    if (floatTryParse(document.getElementById("txtCheckAmount").value.trim()) === false) {
-        document.getElementById("txtCheckAmount").focus();
-        document.getElementById("txtSalesTaxAmount").value = "";
-        document.getElementById("txtTipAmount").value = "";
+    if (floatTryParse(txtCheckAmount.value.trim()) === false) {
+        txtCheckAmount.focus();
+        txtSalesTaxAmount.value = "";
+        txtTipAmount.value = "";
         alert("Enter a positive number for the Check Amount with at most 2 decimal places.");
         return false;
     }
     // tip amount percent
     if (floatTryParse(document.getElementById("txtTipAmountPercent").value.trim()) === false) {
         document.getElementById("txtTipAmountPercent").focus();
-        document.getElementById("txtSalesTaxAmount").value = "";
-        document.getElementById("txtTipAmount").value = "";
+        txtSalesTaxAmount.value = "";
+        txtTipAmount.value = "";
         alert("Enter a positive number for the Tip Amount Percentage with at most 2 decimal places.");
         return false;
     }
     // sales tax percent
-    if (floatTryParse(document.getElementById("txtSalesTaxPercent").value.trim()) === false) {
-        document.getElementById("txtSalesTaxPercent").focus();
-        document.getElementById("txtSalesTaxAmount").value = "";
-        document.getElementById("txtTipAmount").value = "";
+    if (floatTryParse(txtSalesTaxPercent.value.trim()) === false) {
+        txtSalesTaxPercent.focus();
+        txtSalesTaxAmount.value = "";
+        txtTipAmount.value = "";
         alert("Enter a positive number for the Sales Tax Percent with at most 2 decimal places.");
         return false;
     }
