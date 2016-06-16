@@ -5,7 +5,7 @@ gCalculateTipOnTotal = true;
 
 function body_load() {
     btnCalculateTip.onmousedown = calculateTip_onmousedown;
-   
+    btnCloseMenu.onmousedown = closeMenu_onmousedown;
     btnMenu.onmousedown = menu_onmousedown;
     linkTipPreTax.onmousedown = linkTipPreTax_onmousedown;
     linkTipOnTotal.onmousedown = linkTipOnTotal_onmousedown;
@@ -14,6 +14,7 @@ function body_load() {
     gSalesTaxPercent
     document.getElementById("txtSalesTaxPercent").value = convertNumberToString(gSalesTaxPercent);
     document.getElementById("txtTipAmountPercent").value = convertNumberToString(gTipPercent);
+
     document.getElementById("linkTipPreTax").style.color = "#818181";
     document.getElementById("linkTipOnTotal").style.color = "#76DAC4";
 }
@@ -23,7 +24,7 @@ function menu_onmousedown() {
     document.getElementById("divMain").style.marginLeft = "250px";
 }
 
-function closeNav() {
+function closeMenu_onmousedown() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("divMain").style.marginLeft = "0";
 
@@ -71,8 +72,8 @@ function calculateTip_onmousedown(event) {
         var tipAmount = checkAmount * gTipPercent / 100;
     }
 
-    document.getElementById("txtSalesTaxAmount").value = convertNumberToString(salesTaxAmount);
-    document.getElementById("txtTipAmount").value = convertNumberToString(tipAmount);
+    document.getElementById("txtSalesTaxAmount").value = "$" + convertNumberToString(salesTaxAmount);
+    document.getElementById("txtTipAmount").value = "$" + convertNumberToString(tipAmount);
 
     storeSalesTipPercent();
 }

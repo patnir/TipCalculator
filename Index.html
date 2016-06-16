@@ -41,19 +41,6 @@
             background-color: #4D5656;
         }
 
-        #btnMenu {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            width: 35px;
-            height: 28px;
-            background-color: #76DAC4;
-            border-color: white;
-            color: white;
-            font-size: 20px;
-            border-style: solid;
-        }
-
         #menuBar1 {
             position: absolute;
             top: 6px;
@@ -208,7 +195,7 @@
         #btnCalculateTip {
             position: absolute;
             left: 60px;
-            top: 435px;
+            top: 430px;
             width: 240px;
             height: 35px;
             text-align: center;
@@ -243,29 +230,43 @@
             font-family: Sans-Serif;
             color: #818181;
             display: block;
-            transition: 0.3s;
+            transition: 0.1s;
         }
 
-        .closebtn {
+        #btnCloseMenu {
             position: absolute;
             top: 0;
             right: 25px;
-            font-size: 36px !important;
+            font-size: 25px;
             margin-left: 50px;
+        }
+
+        #btnMenu {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 35px;
+            height: 5px;
+            background-color: #76DAC4;
+            border-color: white;
+            color: white;
+            padding-bottom: 25px;
+            font-size: 16px;
+            border-style: solid;
         }
     </style>
 </head>
 <body onload="body_load();">
     <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#" id="linkTipPreTax">Tip Pre Tax</a>
+        <a href="#" id="btnCloseMenu">&#10006</a>
+        <a href="#" id="linkTipPreTax">Tip On Pre Tax</a>
         <a href="#" id="linkTipOnTotal">Tip On Total</a>
     </div>
     <div id="divMain">
         <div id="navbar">Tip Calculator
-            <input type="button" id="btnMenu" value="M"/>
+            <input type="button" id="btnMenu" value=&#9776;>
         </div>
-        <label id="lblCheckAmount">Check Amount</label>
+        <label id="lblCheckAmount">Check Amount ($)</label>
         <input id="txtCheckAmount" type="number" step="0.01"/>
         <label id="lblSalesTaxPercent">Sales Tax (%)</label>
         <input id="txtSalesTaxPercent" type="number" step="0.01" />
