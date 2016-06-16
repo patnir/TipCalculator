@@ -1,5 +1,6 @@
 ﻿var gSalesTaxPercent;
 var gTipPercent;
+var gIsMenuOpen;
 
 gCalculateTipOnTotal = true;
 
@@ -11,23 +12,25 @@ function body_load() {
     linkTipOnTotal.onmousedown = linkTipOnTotal_onmousedown;
     gSalesTaxPercent = ditStorageGet('stp', 7);
     gTipPercent = ditStorageGet('tp', 15);
-    gSalesTaxPercent
-    document.getElementById("txtSalesTaxPercent").value = convertNumberToString(gSalesTaxPercent);
-    document.getElementById("txtTipAmountPercent").value = convertNumberToString(gTipPercent);
+    txtSalesTaxPercent.value = convertNumberToString(gSalesTaxPercent);
+    txtTipAmountPercent.value = convertNumberToString(gTipPercent);
 
-    document.getElementById("linkTipPreTax").style.color = "#818181";
-    document.getElementById("linkTipOnTotal").style.color = "#76DAC4";
+    gIsMenuOpen = false;
+
+    linkTipPreTax.style.color = "#818181";
+    linkTipOnTotal.style.color = "#76DAC4";
 }
 
 function menu_onmousedown() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("divMain").style.marginLeft = "250px";
+    mySidenav.style.width = "250px";
+    divMain.style.marginLeft = "250px";
+    gIsMenuOpen = true;
 }
 
 function closeMenu_onmousedown() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("divMain").style.marginLeft = "0";
-
+    mySidenav.style.width = "0";
+    divMain.style.marginLeft = "0";
+    gIsMenuOpen = false;
 }
 
 function linkTipPreTax_onmousedown() {
@@ -56,6 +59,10 @@ function convertNumberToString(number) {
 
 
 function calculateTip_onmousedown(event) {
+    if (gIsMenuOpen === true) {
+        return;
+    }
+
     if (validateInput() === false) {
         return;
     }
