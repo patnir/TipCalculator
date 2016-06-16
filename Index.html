@@ -37,8 +37,35 @@
             font-size: 20px;
             color: #76DAC4;
             padding-top: 7px;
-            background-color: #000000;
-        } 
+            background-color: #4D5656;
+        }
+
+        #menuBar1 {
+            position: absolute;
+            top: 6px;
+            left: 325px;
+            width: 30px;
+            height: 5px;
+            background-color:white;
+        }
+
+        #menuBar2 {
+            position: absolute;
+            top: 16px;
+            left: 325px;
+            width: 30px;
+            height: 5px;
+            background-color: white;
+        }
+
+        #menuBar3 {
+            position: absolute;
+            top: 26px;
+            left: 325px;
+            width: 30px;
+            height: 5px;
+            background-color: white;
+        }
 
         #lblCheckAmount {
             position: absolute;
@@ -201,7 +228,11 @@
 </head>
 <body onload="body_load();">
     <div id="divMain">
-        <label id="navbar">Tip Calculator</label>
+        <div id="navbar">Tip Calculator
+            <div id="menuBar1"></div>
+            <div id="menuBar2"></div>
+            <div id="menuBar3"></div>
+        </div>
         <label id="lblCheckAmount">Check Amount</label>
         <input type="text" id="txtCheckAmount" autofocus />
         <label id="lblSalesTaxPercent">Sales Tax (%)</label>
