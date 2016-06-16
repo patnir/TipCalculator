@@ -1,14 +1,48 @@
 ﻿var gSalesTaxPercent;
 var gTipPercent;
 
+gCalculateTipOnTotal = true;
+
 function body_load() {
     btnTipPreTax.onmousedown = preTax_onemousedown;
     btnTipOnTotal.onmousedown = tipTotal_onmousedown;
-    gSalesTaxPercent =  ditStorageGet('stp', 7);
+    btnMenu.onmousedown = menu_onmousedown;
+    linkTipPreTax.onmousedown = linkTipPreTax_onmousedown;
+    linkTipOnTotal.onmousedown = linkTipOnTotal_onmousedown;
+    gSalesTaxPercent = ditStorageGet('stp', 7);
     gTipPercent = ditStorageGet('tp', 15);
     gSalesTaxPercent
     document.getElementById("txtSalesTaxPercent").value = convertNumberToString(gSalesTaxPercent);
     document.getElementById("txtTipAmountPercent").value = convertNumberToString(gTipPercent);
+    document.getElementById("linkTipPreTax").style.color = "#818181";
+    document.getElementById("linkTipOnTotal").style.color = "#76DAC4";
+}
+
+function menu_onmousedown() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("divMain").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("divMain").style.marginLeft = "0";
+
+}
+
+function linkTipPreTax_onmousedown() {
+    if (gCalculateTipOnTotal === true) {
+        document.getElementById("linkTipPreTax").style.color = "#76DAC4";
+        document.getElementById("linkTipOnTotal").style.color = "#818181";
+        gCalculateTipOnTotal = false;
+    }
+}
+
+function linkTipOnTotal_onmousedown() {
+    if (gCalculateTipOnTotal === false) {
+        document.getElementById("linkTipPreTax").style.color = "#818181";
+        document.getElementById("linkTipOnTotal").style.color = "#76DAC4";
+        gCalculateTipOnTotal = true;
+    }
 }
 
 function convertNumberToString(number) {
@@ -50,7 +84,7 @@ function tipTotal_onmousedown(event) {
 
     document.getElementById("txtSalesTaxAmount").value = convertNumberToString(salesTaxAmount);
     document.getElementById("txtTipAmount").value = convertNumberToString(tipAmount);
-    
+
     storeSalesTipPercent();
 }
 
