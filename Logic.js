@@ -10,6 +10,8 @@ function body_load() {
     btnMenu.onmousedown = menu_onmousedown;
     linkTipPreTax.onmousedown = linkTipPreTax_onmousedown;
     linkTipOnTotal.onmousedown = linkTipOnTotal_onmousedown;
+    divMain.onmousedown = divMain_onmousedown;
+
     gSalesTaxPercent = ditStorageGet('stp', 7);
     gTipPercent = ditStorageGet('tp', 15);
     txtSalesTaxPercent.value = convertNumberToString(gSalesTaxPercent);
@@ -21,10 +23,18 @@ function body_load() {
     linkTipOnTotal.style.color = "#76DAC4";
 }
 
+function divMain_onmousedown() {
+    if (gIsMenuOpen === true) {
+        closeMenu_onmousedown();
+    }
+}
+
 function menu_onmousedown() {
     mySidenav.style.width = "250px";
     divMain.style.marginLeft = "250px";
-    gIsMenuOpen = true;
+    setTimeout(function () {
+        gIsMenuOpen = true;
+    }, 100);
 }
 
 function closeMenu_onmousedown() {
