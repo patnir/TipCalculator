@@ -1,6 +1,5 @@
 ﻿var gSalesTaxPercent;
 var gTipPercent;
-var gIsMenuOpen;
 
 gCalculateTipOnTotal = true;
 
@@ -10,51 +9,48 @@ function body_load() {
     btnMenu.onmousedown = menu_onmousedown;
     linkTipPreTax.onmousedown = linkTipPreTax_onmousedown;
     linkTipOnTotal.onmousedown = linkTipOnTotal_onmousedown;
-    divMain.onmousedown = divMain_onmousedown;
+    errorMessageOKButton.onmousedown = errorMessageOKButton_onmousedown;
 
     gSalesTaxPercent = ditStorageGet('stp', 7);
     gTipPercent = ditStorageGet('tp', 15);
     txtSalesTaxPercent.value = convertNumberToString(gSalesTaxPercent);
     txtTipAmountPercent.value = convertNumberToString(gTipPercent);
 
-    gIsMenuOpen = false;
+    errorMessageBody.style.visibility = 'hidden';
 
     linkTipPreTax.style.color = "#818181";
     linkTipOnTotal.style.color = "#76DAC4";
 }
 
-function divMain_onmousedown() {
-    if (gIsMenuOpen === true) {
-        closeMenu_onmousedown();
-    }
+function errorMessageOKButton_onmousedown() {
+    errorMessageBody.style.visibility = 'hidden';
+    divMain.style.pointerEvents = 'all';
 }
 
 function menu_onmousedown() {
-    mySidenav.style.width = "250px";
+    settingsMenu.style.width = "250px";
     divMain.style.marginLeft = "250px";
-    setTimeout(function () {
-        gIsMenuOpen = true;
-    }, 100);
+    divMain.style.pointerEvents = 'none';
 }
 
 function closeMenu_onmousedown() {
-    mySidenav.style.width = "0";
+    settingsMenu.style.width = "0";
     divMain.style.marginLeft = "0";
-    gIsMenuOpen = false;
+    divMain.style.pointerEvents = 'all';
 }
 
 function linkTipPreTax_onmousedown() {
     if (gCalculateTipOnTotal === true) {
-        document.getElementById("linkTipPreTax").style.color = "#76DAC4";
-        document.getElementById("linkTipOnTotal").style.color = "#818181";
+        linkTipPreTax.style.color = "#76DAC4";
+        linkTipOnTotal.style.color = "#818181";
         gCalculateTipOnTotal = false;
     }
 }
 
 function linkTipOnTotal_onmousedown() {
     if (gCalculateTipOnTotal === false) {
-        document.getElementById("linkTipPreTax").style.color = "#818181";
-        document.getElementById("linkTipOnTotal").style.color = "#76DAC4";
+        linkTipPreTax.style.color = "#818181";
+        linkTipOnTotal.style.color = "#76DAC4";
         gCalculateTipOnTotal = true;
     }
 }
@@ -64,15 +60,14 @@ function convertNumberToString(number) {
     if (number % 1 === 0) {
         return number.toString() + ".00";
     }
+    else if (number * 10 % 1 === 0) {
+        return number.toString() + "0";
+    }
     return number.toString();
 }
 
 
 function calculateTip_onmousedown(event) {
-    if (gIsMenuOpen === true) {
-        return;
-    }
-
     if (validateInput() === false) {
         return;
     }
@@ -108,21 +103,31 @@ function ditStorageGet(key, dfltValue) {
     return value;
 }
 
+function showErrorMessage(message) {
+    errorMessageString.innerHTML = message;
+}
+
 function validateInput() {
     // check amount
     if (floatTryParse(txtCheckAmount.value.trim()) === false) {
         txtCheckAmount.focus();
         txtSalesTaxAmount.value = "";
         txtTipAmount.value = "";
-        alert("Enter a positive number for the Check Amount with at most 2 decimal places.");
+        var errorMessage = "Enter a positive number for the Check Amount with at most 2 decimal places.";
+        errorMessageBody.style.visibility = 'visible';
+        divMain.style.pointerEvents = 'none';
+        showErrorMessage(errorMessage);
         return false;
     }
     // tip amount percent
-    if (floatTryParse(document.getElementById("txtTipAmountPercent").value.trim()) === false) {
-        document.getElementById("txtTipAmountPercent").focus();
+    if (floatTryParse(txtTipAmountPercent.value.trim()) === false) {
+        txtTipAmountPercent.focus();
         txtSalesTaxAmount.value = "";
         txtTipAmount.value = "";
-        alert("Enter a positive number for the Tip Amount Percentage with at most 2 decimal places.");
+        var errorMessage = "Enter a positive number for the Tip Amount Percentage with at most 2 decimal places.";
+        errorMessageBody.style.visibility = 'visible';
+        divMain.style.pointerEvents = 'none';
+        showErrorMessage(errorMessage);
         return false;
     }
     // sales tax percent
@@ -130,7 +135,10 @@ function validateInput() {
         txtSalesTaxPercent.focus();
         txtSalesTaxAmount.value = "";
         txtTipAmount.value = "";
-        alert("Enter a positive number for the Sales Tax Percent with at most 2 decimal places.");
+        var errorMessage = "Enter a positive number for the Sales Tax Percent with at most 2 decimal places.";
+        errorMessageBody.style.visibility = 'visible';
+        divMain.style.pointerEvents = 'none';
+        showErrorMessage(errorMessage);
         return false;
     }
     return true;
@@ -160,9 +168,9 @@ function floatTryParse(numberString) {
         else {
             return false;
         }
-        if (totalDecimals > 1) {
-            return false;
-        }
+    }
+    if (totalDecimals > 1) {
+        return false;
     }
     if (totalDecimals === 1
         && (totalNumbersBeforeDecimal < 1

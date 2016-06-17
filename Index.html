@@ -184,7 +184,7 @@
             border-style: solid;
         }
 
-        .sidenav {
+        #settingsMenu {
             height: 100%;
             width: 0;
             height: 510px;
@@ -198,7 +198,7 @@
             transition: 0.5s;
         }
 
-        .sidenav a {
+        #settingsMenu a {
             padding: 8px 8px 8px 32px;
             font-size: 25px;
             font-family: Sans-Serif;
@@ -229,10 +229,43 @@
             font-size: 20px;
             border-style: solid;
         }
+        #errorMessageBody {
+            position: absolute;
+            top: 185px;
+            left: 80px;
+            width: 200px;
+            height: 200px;
+            background-color: #4D5656;
+            color: #76DAC4;
+            pointer-events:all;
+        }
+        #errorMessageOKButton{
+            position: absolute;
+            top: 150px;
+            left: 20px;
+            width: 160px;
+            height: 35px;
+            text-align: center;
+            font-family: Sans-Serif;
+            font-size: 20px;
+            border-width: 3px;
+            border-radius: 5px;
+            background-color: #76DAC4;
+            border-color: white;
+            color: white;
+            border-style: solid;
+        }
+        #errorMessageString {
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 5px;
+            font-size: 16px;
+            font-family: Sans-Serif;
+        }
     </style>
 </head>
 <body onload="body_load();">
-    <div id="mySidenav" class="sidenav">
+    <div id="settingsMenu">
         <a href="#" id="btnCloseMenu">&#10006</a>
         <a href="#" id="linkTipPreTax">Tip On Pre Tax</a>
         <a href="#" id="linkTipOnTotal">Tip On Total</a>
@@ -242,11 +275,11 @@
             <input type="button" id="btnMenu" value=&#9776;>
         </div>
         <label id="lblCheckAmount">Check Amount ($)</label>
-        <input id="txtCheckAmount" type="number" step="0.01"/>
+        <input id="txtCheckAmount" type="text"/>
         <label id="lblSalesTaxPercent">Sales Tax (%)</label>
-        <input id="txtSalesTaxPercent" type="number" step="0.01" />
+        <input id="txtSalesTaxPercent" type="text"/>
         <label id="lblTipAmountPercent">Tip Amount (%)</label>
-        <input id="txtTipAmountPercent" type="number" step="0.01" />
+        <input id="txtTipAmountPercent" type="text"/>
         <label id="lblSalesTaxAmount">Sales Tax</label>
         <input type="text" id="txtSalesTaxAmount" readonly />
         <label id="lblTipAmount">Tip Amount</label>
@@ -254,6 +287,10 @@
         <input type="button"
                id="btnCalculateTip"
                value="Calculate Tip" />
+    </div>
+    <div id="errorMessageBody">
+        <p id="errorMessageString">This is what it looks like</p>
+        <input type="button" id="errorMessageOKButton" value="OK" />
     </div>
 </body>
 </html>
