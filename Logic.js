@@ -19,7 +19,10 @@ function body_load() {
     errorMessageBody.style.visibility = 'hidden';
 
     linkTipPreTax.style.color = "#818181";
+    descriptionPreTax.style.color = "#818181";
     linkTipOnTotal.style.color = "#76DAC4";
+    descriptionOnTotal.style.color = "#76DAC4";
+    txtCheckAmount.focus();
 }
 
 function errorMessageOKButton_onmousedown() {
@@ -28,13 +31,13 @@ function errorMessageOKButton_onmousedown() {
 }
 
 function menu_onmousedown() {
-    settingsMenu.style.width = "250px";
-    divMain.style.marginLeft = "250px";
+    settingsMenu.style.marginLeft = "-250px";
+    divMain.style.marginLeft = "-250px";
     divMain.style.pointerEvents = 'none';
 }
 
 function closeMenu_onmousedown() {
-    settingsMenu.style.width = "0";
+    settingsMenu.style.marginLeft = "0";
     divMain.style.marginLeft = "0";
     divMain.style.pointerEvents = 'all';
 }
@@ -42,7 +45,9 @@ function closeMenu_onmousedown() {
 function linkTipPreTax_onmousedown() {
     if (gCalculateTipOnTotal === true) {
         linkTipPreTax.style.color = "#76DAC4";
+        descriptionPreTax.style.color = "#76DAC4";
         linkTipOnTotal.style.color = "#818181";
+        descriptionOnTotal.style.color = "#818181";
         gCalculateTipOnTotal = false;
     }
 }
@@ -50,7 +55,9 @@ function linkTipPreTax_onmousedown() {
 function linkTipOnTotal_onmousedown() {
     if (gCalculateTipOnTotal === false) {
         linkTipPreTax.style.color = "#818181";
+        descriptionPreTax.style.color = "#818181";
         linkTipOnTotal.style.color = "#76DAC4";
+        descriptionOnTotal.style.color = "#76DAC4";
         gCalculateTipOnTotal = true;
     }
 }
@@ -110,24 +117,24 @@ function showErrorMessage(message) {
 function validateInput() {
     // check amount
     if (floatTryParse(txtCheckAmount.value.trim()) === false) {
-        txtCheckAmount.focus();
         txtSalesTaxAmount.value = "";
         txtTipAmount.value = "";
         var errorMessage = "Enter a positive number for the Check Amount with at most 2 decimal places.";
         errorMessageBody.style.visibility = 'visible';
         divMain.style.pointerEvents = 'none';
         showErrorMessage(errorMessage);
+        txtCheckAmount.focus();
         return false;
     }
     // tip amount percent
     if (floatTryParse(txtTipAmountPercent.value.trim()) === false) {
-        txtTipAmountPercent.focus();
         txtSalesTaxAmount.value = "";
         txtTipAmount.value = "";
         var errorMessage = "Enter a positive number for the Tip Amount Percentage with at most 2 decimal places.";
         errorMessageBody.style.visibility = 'visible';
         divMain.style.pointerEvents = 'none';
         showErrorMessage(errorMessage);
+        txtTipAmountPercent.focus();
         return false;
     }
     // sales tax percent
@@ -139,6 +146,7 @@ function validateInput() {
         errorMessageBody.style.visibility = 'visible';
         divMain.style.pointerEvents = 'none';
         showErrorMessage(errorMessage);
+        txtSalesTaxPercent.focus();
         return false;
     }
     return true;

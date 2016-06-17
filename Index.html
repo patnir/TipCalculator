@@ -186,12 +186,11 @@
 
         #settingsMenu {
             height: 100%;
-            width: 0;
+            width: 250px;
+            top: 0px;
+            left: 360px;
             height: 510px;
             position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
             background-color: #424949;
             overflow-x: hidden;
             padding-top: 60px;
@@ -204,8 +203,14 @@
             font-family: Sans-Serif;
             color: #818181;
             text-decoration: none;
-            display: block;
             transition: 0.3s;
+        }
+
+        #settingsMenu p {
+            font-family: Sans-Serif;
+            padding-left: 50px;
+            padding-right: 10px;
+            padding-bottom: 20px;
         }
 
         #btnCloseMenu {
@@ -219,7 +224,7 @@
         #btnMenu {
             position: absolute;
             top: 5px;
-            left: 5px;
+            left: 320px;
             width: 35px;
             height: 20px;
             background-color: #76DAC4;
@@ -267,19 +272,21 @@
 <body onload="body_load();">
     <div id="settingsMenu">
         <a href="#" id="btnCloseMenu">&#10006</a>
-        <a href="#" id="linkTipPreTax">Tip On Pre Tax</a>
+        <a href="#" id="linkTipPreTax">Tip On Pre-Tax</a>
+        <p id="descriptionPreTax">Calculate tip on the pre-tax check amount.</p>
         <a href="#" id="linkTipOnTotal">Tip On Total</a>
+        <p id="descriptionOnTotal">Calculate tip on the total check amount.</p>
     </div>
     <div id="divMain">
         <div id="navbar">Tip Calculator
             <input type="button" id="btnMenu" value=&#9776;>
         </div>
         <label id="lblCheckAmount">Check Amount ($)</label>
-        <input id="txtCheckAmount" type="text"/>
+        <input id="txtCheckAmount" type="tel"/>
         <label id="lblSalesTaxPercent">Sales Tax (%)</label>
-        <input id="txtSalesTaxPercent" type="text"/>
+        <input id="txtSalesTaxPercent" type="tel"/>
         <label id="lblTipAmountPercent">Tip Amount (%)</label>
-        <input id="txtTipAmountPercent" type="text"/>
+        <input id="txtTipAmountPercent" type="tel"/>
         <label id="lblSalesTaxAmount">Sales Tax</label>
         <input type="text" id="txtSalesTaxAmount" readonly />
         <label id="lblTipAmount">Tip Amount</label>
