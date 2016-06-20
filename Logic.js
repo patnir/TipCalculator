@@ -1,9 +1,14 @@
-﻿var gSalesTaxPercent;
+﻿/// <reference path="Index.html">
+
+var gSalesTaxPercent;
 var gTipPercent;
 
 gCalculateTipOnTotal = true;
 
+// window.onresize = window_onresize;
+
 function body_load() {
+
     btnCalculateTip.onmousedown = calculateTip_onmousedown;
     btnCloseMenu.onmousedown = closeMenu_onmousedown;
     btnMenu.onmousedown = menu_onmousedown;
@@ -16,7 +21,7 @@ function body_load() {
     txtSalesTaxPercent.value = convertNumberToString(gSalesTaxPercent);
     txtTipAmountPercent.value = convertNumberToString(gTipPercent);
 
-    errorMessageBody.style.visibility = 'hidden';
+    errorMessageMain.style.visibility = 'hidden';
 
     linkTipPreTax.style.color = "#818181";
     descriptionPreTax.style.color = "#818181";
@@ -26,7 +31,7 @@ function body_load() {
 }
 
 function errorMessageOKButton_onmousedown() {
-    errorMessageBody.style.visibility = 'hidden';
+    errorMessageMain.style.visibility = 'hidden';
     divMain.style.pointerEvents = 'all';
 }
 
@@ -98,8 +103,8 @@ function calculateTip_onmousedown(event) {
 }
 
 function storeSalesTipPercent() {
-    localStorage.stp = "" + gSalesTaxPercent + "";
-    localStorage.tp = "" + gTipPercent + "";
+    localStorage.stp = gSalesTaxPercent.toString();
+    localStorage.tp = gTipPercent.toString();
 }
 
 function ditStorageGet(key, dfltValue) {
@@ -111,6 +116,8 @@ function ditStorageGet(key, dfltValue) {
 }
 
 function showErrorMessage(message) {
+    errorMessageMain.style.visibility = 'visible';
+    divMain.style.pointerEvents = 'none';
     errorMessageString.innerHTML = message;
 }
 
@@ -119,9 +126,7 @@ function validateInput() {
     if (floatTryParse(txtCheckAmount.value.trim()) === false) {
         txtSalesTaxAmount.value = "";
         txtTipAmount.value = "";
-        var errorMessage = "Enter a positive number for the Check Amount with at most 2 decimal places.";
-        errorMessageBody.style.visibility = 'visible';
-        divMain.style.pointerEvents = 'none';
+        var errorMessage = "Enter a positive number for the Check Amount with at most 2 decimal places.";       
         showErrorMessage(errorMessage);
         txtCheckAmount.focus();
         return false;
@@ -131,8 +136,6 @@ function validateInput() {
         txtSalesTaxAmount.value = "";
         txtTipAmount.value = "";
         var errorMessage = "Enter a positive number for the Tip Amount Percentage with at most 2 decimal places.";
-        errorMessageBody.style.visibility = 'visible';
-        divMain.style.pointerEvents = 'none';
         showErrorMessage(errorMessage);
         txtTipAmountPercent.focus();
         return false;
@@ -143,8 +146,6 @@ function validateInput() {
         txtSalesTaxAmount.value = "";
         txtTipAmount.value = "";
         var errorMessage = "Enter a positive number for the Sales Tax Percent with at most 2 decimal places.";
-        errorMessageBody.style.visibility = 'visible';
-        divMain.style.pointerEvents = 'none';
         showErrorMessage(errorMessage);
         txtSalesTaxPercent.focus();
         return false;
@@ -172,17 +173,16 @@ function floatTryParse(numberString) {
         }
         else if (checkDecimal.test(checkDigits[i])) {
             totalDecimals += 1;
+            if (totalDecimals > 1) {
+                return false;
+            }
         }
         else {
             return false;
         }
     }
-    if (totalDecimals > 1) {
-        return false;
-    }
     if (totalDecimals === 1
-        && (totalNumbersBeforeDecimal < 1
-        || totalNumbersAfterDecimal < 1)) {
+    	&& (totalNumbersBeforeDecimal < 1 || totalNumbersAfterDecimal < 1)) {
         return false;
     }
     if (totalNumbersAfterDecimal > 2) {
